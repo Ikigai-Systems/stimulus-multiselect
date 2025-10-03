@@ -154,7 +154,7 @@ export default class Multiselect extends Controller {
       this.previewTarget.innerHTML = ""
     }
 
-    this.element.dispatchEvent(new Event("multiselect-change"))
+    this.dispatch("change")
   }
 
   removeItem(e) {
@@ -164,7 +164,7 @@ export default class Multiselect extends Controller {
 
     this.selectedValue = this.selectedValue.filter(x => x.value.toString() !== itemToRemove.dataset.value)
     this.uncheckItem(itemToRemove.dataset.value)
-    this.element.dispatchEvent(new CustomEvent("multiselect-removed", { detail: { id: itemToRemove.dataset.value } }))
+    this.dispatch("item-removed", { detail: { id: itemToRemove.dataset.value } })
   }
 
   uncheckItem(value) {
@@ -196,10 +196,10 @@ export default class Multiselect extends Controller {
 
       input.setAttribute("aria-selected", "true")
       input.closest("li").classList.add("multiselect__focused")
-      this.element.dispatchEvent(new CustomEvent("multiselect-added", { detail: { item: item } }))
+      this.dispatch("item-added", { detail: { item: item } })
     } else {
       newSelectedArray = newSelectedArray.filter(selected => selected.value.toString() !== item.value)
-      this.element.dispatchEvent(new CustomEvent("multiselect-removed", { detail: { id: item.value } }))
+      this.dispatch("item-removed", { detail: { id: item.value } })
     }
 
     this.selectedValue = newSelectedArray
@@ -231,7 +231,7 @@ export default class Multiselect extends Controller {
 
     this.uncheckItem(value)
     this.selectedValue = selected
-    this.element.dispatchEvent(new CustomEvent("multiselect-removed", { detail: { id: value } }))
+    this.dispatch("item-removed", { detail: { id: value } })
   }
 
   onEnterKeydown = (e) => {
@@ -277,7 +277,7 @@ export default class Multiselect extends Controller {
     this.itemsValue = this.itemsValue.concat(addedItem)
     this.selectedValue = this.selectedValue.concat(addedItem)
     this.searchTarget.value = ""
-    this.element.dispatchEvent(new CustomEvent("multiselect-added", { detail: { item: addedItem } }))
+    this.dispatch("item-added", { detail: { item: addedItem } })
   }
 
   navigate(target) {
@@ -302,7 +302,7 @@ export default class Multiselect extends Controller {
   }
 
   addableEvent() {
-    document.dispatchEvent(new CustomEvent("multiselect-addable"))
+    this.dispatch("item-addable")
   }
 
   get template() {

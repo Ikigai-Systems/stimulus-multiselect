@@ -117,8 +117,8 @@ document.getElementById("multiselect_id").values
 
 ## Events
 
-- `multiselect-change` whenever an element is added or removed
-- `multiselect-removed` whenever an element is removed. This event contains the value of the removed element in the events `detail` under `id`:
+- `multiselect:change` whenever an element is added or removed
+- `multiselect:item-removed` whenever an element is removed. This event contains the value of the removed element in the events `detail` under `id`:
 
 ```javascript
 myFunction(event) {
@@ -126,14 +126,14 @@ myFunction(event) {
 }
 ```
 
-- `multiselect-added` whenever an element is added. This event contains the added object in the events `detail` under `item`:
+- `multiselect:item-added` whenever an element is added. This event contains the added object in the events `detail` under `item`:
 
 ```javascript
 myFunction(event) {
   console.log(event.detail.item) // Should print the added object - { "value": "test", "text": "Test" }
 }
 ```
-- `multiselect-addable` If the addable url is added to the multiselect when the search provides no results a link appears. Pressing this link fires this event. You can use this event as a hook to decide how you want to handle adding a non-existing element to the multiselect.
+- `multiselect:item-addable` If the addable url is added to the multiselect when the search provides no results a link appears. Pressing this link fires this event. You can use this event as a hook to decide how you want to handle adding a non-existing element to the multiselect.
 
 ## Examples
 
