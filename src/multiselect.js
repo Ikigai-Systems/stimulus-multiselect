@@ -44,10 +44,11 @@ export default class Multiselect extends Controller {
   async searchRemote() {
     if (this.searchTarget.value === "") return
 
-    const response = await fetch(this.searchUrlValue + "?" + new URLSearchParams({
-      q: this.searchTarget.value,
-      preselects: this.selectedValue.map(x => x.value).join(",")
-    }))
+    const url = new URL(this.searchUrlValue, window.location.origin)
+    url.searchParams.set("q", this.searchTarget.value)
+    url.searchParams.set("preselects", this.selectedValue.map(x => x.value).join(","))
+
+    const response = await fetch(url.toString())
 
     this.itemsValue = await response.json()
     this.dropdownTarget.classList.add("multiselect__dropdown--open")
