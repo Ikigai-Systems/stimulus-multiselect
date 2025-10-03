@@ -1,6 +1,6 @@
 const activeSelector = "[aria-selected='true']"
 
-import { Controller } from "@hotwired/stimulus"
+import {Controller} from "@hotwired/stimulus"
 
 export default class Multiselect extends Controller {
   static targets = ["hidden", "list", "search", "preview", "dropdown", "item", "addable", "inputContainer"]
@@ -49,9 +49,7 @@ export default class Multiselect extends Controller {
       preselects: this.selectedValue.map(x => x.value).join(",")
     }))
 
-    const searchedItems = await response.json()
-
-    this.itemsValue = searchedItems
+    this.itemsValue = await response.json()
     this.dropdownTarget.classList.add("multiselect__dropdown--open")
   }
 
