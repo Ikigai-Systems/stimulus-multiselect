@@ -36,7 +36,7 @@
     "start": "http-server ./examples -p 3300",
     "cy:run": "cypress run",
     "test": "start-server-and-test start http://localhost:3300 cy:run",
-    "postversion": "git push && git push --tags",
+    "postversion": "if [ \"$CI\" != \"true\" ]; then git push && git push --tags; fi",
     "release": "yarn test && yarn version && npm adduser && npm publish"
   }
 }
