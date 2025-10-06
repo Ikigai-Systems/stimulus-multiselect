@@ -23,7 +23,7 @@ jobs:
           scope: "@ikigai-systems"
       - run: rm -rf node_modules
       - run: npm ci
-      - run: npm run build
+      - run: npm run build --if-present
       - name: Change scope in package.json
         run: jq '.name = "@ikigai-systems/" + .name' package.json > temp.json && mv temp.json package.json
       - run: npm publish
