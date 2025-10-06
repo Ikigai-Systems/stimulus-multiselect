@@ -303,7 +303,11 @@ export default class Multiselect extends Controller {
   }
 
   addableEvent() {
-    this.dispatch("item-addable")
+    const query = this.searchTarget.value
+
+    if (query === "" || this.itemsValue.some(item => item.text === query)) return
+
+    this.dispatch("item-addable", { detail: { addable: this.searchTarget.value } })
   }
 
   get template() {
