@@ -89,6 +89,8 @@ export default class Multiselect extends Controller {
   }
 
   toggleDropdown() {
+    if (this.disabledValue === true) return
+
     if (this.dropdownTarget.classList.contains("multiselect__dropdown--open")) {
       this.dropdownTarget.classList.remove("multiselect__dropdown--open")
       if (this.selectedValue.length > 0) this.inputContainerTarget.style.display = "none"
